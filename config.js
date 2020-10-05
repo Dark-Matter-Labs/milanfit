@@ -1,4 +1,4 @@
-var dataUrl = 'https://archive.org/download/ds623_database-cened-2-certificazione-energetica-degli-e_46js-etcq/ds623_database-cened-2-certificazione-energetica-degli-e_46js-etcq.csv';
+var dataUrl = 'data/milan.csv';
 var maxZoom = 20;
 var fieldSeparator = ';';
 var baseUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
