@@ -3,6 +3,7 @@ var basemap = new L.TileLayer(baseUrl, {maxZoom: 20, attribution: baseAttributio
 var center = new L.LatLng(0, 0);
 
 var map = new L.Map('map', {center: center, zoom: 10, maxZoom: maxZoom, layers: [basemap]});
+map.spin(true);
 
 var popupOpts = {
     autoPanPadding: new L.Point(5, 50),
@@ -142,6 +143,7 @@ $(document).ready( function() {
             typeAheadSource = ArrayToSet(typeAheadSource);
             $('#filter-string').typeahead({source: typeAheadSource});
             addCsvMarkers();
+            map.spin(false);
         }
     });
 
