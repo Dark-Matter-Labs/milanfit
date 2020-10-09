@@ -25,9 +25,9 @@ var LeafIcon = L.Icon.extend({
     }
 });
 
-var greenIcon = new LeafIcon({iconUrl: '../img/green.png'}),
-    redIcon = new LeafIcon({iconUrl: '../img/red.png'}),
-    blueIcon = new LeafIcon({iconUrl: '../img/blue.png'});
+var greenIcon = new LeafIcon({iconUrl: 'https://raw.githubusercontent.com/Dark-Matter-Labs/milanfit/master/img/green.png'}),
+    redIcon = new LeafIcon({iconUrl: 'https://raw.githubusercontent.com/Dark-Matter-Labs/milanfit/master/img/red.png'}),
+    blueIcon = new LeafIcon({iconUrl: 'https://raw.githubusercontent.com/Dark-Matter-Labs/milanfit/master/img/blue.png'});
 
 var points = L.geoCsv (null, {
     firstLineTitles: true,
