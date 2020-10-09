@@ -10,6 +10,25 @@ var popupOpts = {
     autoPan: true
 };
 
+var currLat, currLng, currRetroIntensity;
+var heatMap = [];
+
+const scale = (num, in_min, in_max, out_min, out_max) => {
+    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  }
+  
+
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconAnchor:   [22, 94],
+        popupAnchor:  [-3, -76]
+    }
+});
+
+var greenIcon = new LeafIcon({iconUrl: '../img/green.png'}),
+    redIcon = new LeafIcon({iconUrl: '../img/red.png'}),
+    blueIcon = new LeafIcon({iconUrl: '../img/blue.png'});
+
 var points = L.geoCsv (null, {
     firstLineTitles: true,
     fieldSeparator: fieldSeparator,
@@ -18,6 +37,20 @@ var points = L.geoCsv (null, {
         for (var clave in feature.properties) {
             var title = points.getPropertyTitle(clave).strip();
             var attr = feature.properties[clave];
+            if(title == 'location'){
+                
+                currLat = attr.toString().split(',')[0].replace('(','');
+                currLng = attr.toString().split(',')[1].replace(')','');
+            }
+            
+            if(title == 'retro_intensity'){
+                currRetroIntensity = attr;
+            }
+            
+            if ((typeof currLat !== 'undefined') && (typeof currLng !== 'undefined') &&  (typeof currRetroIntensity !== 'undefined')){
+                heatMap.push([parseFloat(currLat), parseFloat(currLng), currRetroIntensity]);
+            }
+
             if (title == labelColumn) {
                 layer.bindLabel(feature.properties[clave], {className: 'map-label'});
             }
@@ -27,7 +60,20 @@ var points = L.geoCsv (null, {
             if (attr) {
                 popup += '<tr><th>'+title+'</th><td>'+ attr +'</td></tr>';
             }
+
+            if(title == 'PIANO' && attr == 'T'){
+                layer.setIcon(greenIcon);
+            }
+            
+            if(title == 'PIANO' && attr == '1'){
+                layer.setIcon(redIcon);
+            }
+
+            if(title == 'PIANO' && attr == '3'){
+                layer.setIcon(blueIcon);
+            }
         }
+        
         popup += "</table></popup-content>";
         layer.bindPopup(popup, popupOpts);
     },
@@ -50,6 +96,8 @@ var points = L.geoCsv (null, {
         return hit;
     }
 });
+
+
 
 var hits = 0;
 var total = 0;
@@ -144,7 +192,11 @@ $(document).ready( function() {
             $('#filter-string').typeahead({source: typeAheadSource});
             addCsvMarkers();
             map.spin(false);
+            L.heatLayer(
+                heatMap, {radius: 10, max: 900}
+            ,).addTo(map);
         }
+
     });
 
     $("#clear").click(function(evt){
@@ -154,3 +206,4 @@ $(document).ready( function() {
     });
 
 });
+
