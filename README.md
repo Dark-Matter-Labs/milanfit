@@ -1,7 +1,7 @@
 # MilanFit - WIP prototype for retrofitting preselection
 
 ### Features
-* Data source is[Comune Milano](https://dati.comune.milano.it/dataset/ds623_database_cened2__certificazione_energetica_degli_edifici_nel) 
+* Data source is [Comune Milano](https://dati.comune.milano.it/dataset/ds623_database_cened2__certificazione_energetica_degli_edifici_nel) 
 * Data is pre-processed in Python first
 * More details to follow!
 
@@ -9,7 +9,7 @@
 Download, copy the template and load index.html in a browser to confirm that everything works
 
 ```
-cd milancv
+cd milanfit
 cp config.js.template config.js
 open index.html
 ```
