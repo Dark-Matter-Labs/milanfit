@@ -43,7 +43,7 @@ var points = L.geoCsv (null, {
                 currLng = attr.toString().split(',')[1].replace(')','');
             }
             
-            if(title == 'retro_intensity'){
+            if(title == 'potential_energyuse_reduction'){
                 currRetroIntensity = attr;
             }
             
