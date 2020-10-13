@@ -61,17 +61,17 @@ var points = L.geoCsv (null, {
                 popup += '<tr><th>'+title+'</th><td>'+ attr +'</td></tr>';
             }
 
-            if(title == 'PIANO' && attr == 'T'){
-                layer.setIcon(greenIcon);
-            }
+            // if(title == 'PIANO' && attr == 'T'){
+            //     layer.setIcon(greenIcon);
+            // }
             
-            if(title == 'PIANO' && attr == '1'){
-                layer.setIcon(redIcon);
-            }
+            // if(title == 'PIANO' && attr == '1'){
+            //     layer.setIcon(redIcon);
+            // }
 
-            if(title == 'PIANO' && attr == '3'){
-                layer.setIcon(blueIcon);
-            }
+            // if(title == 'PIANO' && attr == '3'){
+            //     layer.setIcon(blueIcon);
+            // }
         }
         
         popup += "</table></popup-content>";
