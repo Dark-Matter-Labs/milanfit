@@ -119,7 +119,11 @@ var addCsvMarkers = function() {
     map.removeLayer(markers);
     points.clearLayers();
 
-    markers = new L.MarkerClusterGroup(clusterOptions);
+    markers = new L.MarkerClusterGroup({
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: true,
+        zoomToBoundsOnClick: true
+    });
     points.addData(dataCsv);
     markers.addLayer(points);
 
