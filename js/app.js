@@ -204,7 +204,7 @@ $(document).ready( function() {
             var controlLayers = L.control.layers().addTo(map);
 
             // Loading a GeoJSON file (using jQuery's $.getJSON)    
-            $.getJSON('../data/sezioni_censimento_2011+DI.geojson', function (data) {
+            $.getJSON('data/sezioni_censimento_2011+DI.geojson', function (data) {
 
             // Use the data to create a GeoJSON layer and add it to the map
             var geojsonLayer = L.geoJson(data, {
