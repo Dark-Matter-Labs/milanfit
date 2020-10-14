@@ -199,6 +199,47 @@ $(document).ready( function() {
             L.heatLayer(
                 heatMap, {radius: 10, max: 900}
             ,).addTo(map);
+
+            // Create the layercontrol and add it to the map
+            var controlLayers = L.control.layers().addTo(map);
+
+            // Loading a GeoJSON file (using jQuery's $.getJSON)    
+            $.getJSON('../data/sezioni_censimento_2011+DI.geojson', function (data) {
+
+            // Use the data to create a GeoJSON layer and add it to the map
+            var geojsonLayer = L.geoJson(data, {
+                onEachFeature: function(feature, featureLayer) {
+                    var popup = '<div class="popup-content"><table class="table table-striped table-bordered table-condensed">';
+                    for (var clave in feature.properties) {
+
+                        var attr = feature.properties[clave];
+                       
+                        if (attr) {
+                            popup += '<tr><th>'+clave+'</th><td>'+ attr +'</td></tr>';
+                        }
+                    }
+                    
+                    popup += "</table></popup-content>";
+                    featureLayer.bindPopup(popup, popupOpts);
+
+                    featureLayer.setStyle({
+                        "color": "#7f8c8d",
+                        "fillOpacity": .1,
+                    })
+
+                    if(clave == 'Incomplete Deprivation Index'){
+                        featureLayer.setStyle({
+                            "weight": attr
+                        })
+                    }
+                   
+                },
+                }).addTo(map);
+
+            // Add the geojson layer to the layercontrol
+            controlLayers.addOverlay(geojsonLayer, 'Census layer');
+
+            });
         }
 
     });
